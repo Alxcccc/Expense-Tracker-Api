@@ -4,7 +4,7 @@ class ExpenseCategory(BaseModel):
     value: str = Field(..., description="Description of expense")
     
     @field_validator("value")
-    def validator_description(cls, value: str, categories = ["groceries", "leisure", "electronics", "utilities", "clothing", "health", "others"]):
+    def validator_category(cls, value: str, categories = ["groceries", "leisure", "electronics", "utilities", "clothing", "health", "others"]):
         if not value.lower() in categories:
             raise ValueError(f"it isn't a correct category")
         

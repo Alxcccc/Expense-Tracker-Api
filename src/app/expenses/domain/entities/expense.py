@@ -14,3 +14,6 @@ class Expense(BaseModel):
     description: ExpenseDescription
     category: ExpenseCategory
     amount: ExpenseAmount
+    idUser: int
+    
+

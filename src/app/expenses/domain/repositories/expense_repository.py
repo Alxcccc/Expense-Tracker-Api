@@ -10,7 +10,7 @@ class ExpenseRepository(ABC):
         pass
     
     @abstractmethod
-    def get_by_id(self, id_expense: int) -> Optional[Expense]:
+    def get_by_id(self, id_user: int, id_expense: int) -> Optional[Expense]:
         pass
     
     @abstractmethod
@@ -18,9 +18,9 @@ class ExpenseRepository(ABC):
         pass
     
     @abstractmethod
-    def update(self, id_expense: int, expense: Expense) -> Union[bool, Expense]:
+    def update(self, id_user: int, id_expense: int, expense: Expense) -> Union[bool, Expense]:
         pass
     
     @abstractmethod
-    def delete(self, id_expense: int) -> bool:
+    def delete(self, id_user: int, id_expense: int) -> bool:
         pass

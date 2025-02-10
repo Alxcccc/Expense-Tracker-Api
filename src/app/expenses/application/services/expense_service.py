@@ -11,17 +11,17 @@ class ExpenseService:
     def __init__(self, expense_repository: ExpenseRepository):
         self.expense_repository = expense_repository
         
-    def get_all(self, id_user) -> List[Expense]:
+    def get_all(self, id_user: int) -> List[Expense]:
         return self.expense_repository.get_all(id_user)
     
-    def get_by_id(self, id_expense: int) -> Expense:
-        return self.expense_repository.get_by_id(id_expense)
+    def get_by_id(self, id_user: int , id_expense: int) -> Expense:
+        return self.expense_repository.get_by_id(id_user, id_expense)
     
     def create(self, expense: Expense) -> Expense:
         return self.expense_repository.create(expense)
     
-    def update(self, id_expense: int, expense: Expense) -> Expense:
-        return self.expense_repository.update(id_expense, expense)
+    def update(self, id_user: int, id_expense: int, expense: Expense) -> Expense:
+        return self.expense_repository.update(id_user, id_expense, expense)
     
-    def delete(self, id_expense: int) -> bool:
-        return self.expense_repository.delete(id_expense)
+    def delete(self, id_user: int, id_expense: int) -> bool:
+        return self.expense_repository.delete(id_user, id_expense)

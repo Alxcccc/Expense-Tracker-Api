@@ -44,10 +44,10 @@ class ExpenseRepositoryImpl(ExpenseRepository):
         except Exception as e:
             print(e)
     
-    def get_by_id(self, id_expense: int) -> Expense:
+    def get_by_id(self, id_user, id_expense: int) -> Expense:
         try:
             with Session(DataBase.engine) as session:
-                statement = select(ExpenseDatabase).where(ExpenseDatabase.id_expense == id_expense)
+                statement = select(ExpenseDatabase).where(ExpenseDatabase.id_expense == id_expense and ExpenseDatabase.idUser == id_user)
                 result = session.execute(statement).all()
                 return {
                         "id_expense":result.id_expense,

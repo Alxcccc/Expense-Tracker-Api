@@ -7,7 +7,8 @@ class ExpenseDescription(BaseModel):
     def validator_description(cls, value: str, size_max = 250):
         if len(value) > size_max:
             raise ValueError(f"the length of Description is greater than {size_max}")
-        
+        return value
+    
     def __eq__(self, other):
         return isinstance(other, ExpenseDescription) and self.value == other.value
     

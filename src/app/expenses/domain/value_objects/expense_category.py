@@ -7,6 +7,7 @@ class ExpenseCategory(BaseModel):
     def validator_category(cls, value: str, categories = ["groceries", "leisure", "electronics", "utilities", "clothing", "health", "others"]):
         if not value.lower() in categories:
             raise ValueError(f"it isn't a correct category")
+        return value
         
     def __eq__(self, other):
         return isinstance(other, ExpenseCategory) and self.value == other.value

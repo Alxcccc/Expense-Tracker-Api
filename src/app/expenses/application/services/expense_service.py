@@ -12,7 +12,7 @@ class ExpenseService:
         self.expense_repository = expense_repository
         
     def get_all(self, id_user) -> List[Expense]:
-        return self.expense_repository.get_all()
+        return self.expense_repository.get_all(id_user)
     
     def get_by_id(self, id_expense: int) -> Expense:
         return self.expense_repository.get_by_id(id_expense)

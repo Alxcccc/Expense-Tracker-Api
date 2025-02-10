@@ -6,6 +6,7 @@ from src.app.expenses.domain.value_objects.expense_date import ExpenseDate
 from src.app.expenses.domain.value_objects.expense_description import ExpenseDescription
 from src.app.expenses.domain.value_objects.expense_category import ExpenseCategory
 from src.app.expenses.domain.value_objects.expense_amount import ExpenseAmount
+from src.app.expenses.domain.value_objects.expense_id_user import ExpenseIdUser
 
 class Expense(BaseModel):
     id_expense: Optional[int]
@@ -14,5 +15,5 @@ class Expense(BaseModel):
     description: ExpenseDescription
     category: ExpenseCategory
     amount: ExpenseAmount
-    idUser: int
+    idUser: ExpenseIdUser
     

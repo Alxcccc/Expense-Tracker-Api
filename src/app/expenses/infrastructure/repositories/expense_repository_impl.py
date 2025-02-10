@@ -21,10 +21,10 @@ from src.app.expenses.domain.value_objects.expense_category import ExpenseCatego
 from src.app.expenses.domain.value_objects.expense_amount import ExpenseAmount
 
 class ExpenseRepositoryImpl(ExpenseRepository):
-    def get_all(self) -> List[ExpenseDatabase]:
+    def get_all(self, id_user: int) -> List[ExpenseDatabase]:
         try:
             with Session(DataBase.engine) as session:
-                statement = select(ExpenseDatabase)
+                statement = select(ExpenseDatabase).where(ExpenseDatabase.idUser == id_user)
                 results = session.exec(statement).all()
                 result = list()
                 for expense in results:
@@ -45,7 +45,22 @@ class ExpenseRepositoryImpl(ExpenseRepository):
             print(e)
     
     def get_by_id(self, id_expense: int) -> Expense:
-        pass
+        try:
+            with Session(DataBase.engine) as session:
+                statement = select(ExpenseDatabase).where(ExpenseDatabase.id_expense == id_expense)
+                result = session.execute(statement).all()
+                return {
+                        "id_expense":result.id_expense,
+                        "expense_title": result.expense_title,
+                        "expense_date": result.expense_date,
+                        "description": result.description,
+                        "category": result.category,
+                        "amount": result.amount,
+                        "idUser": result.idUser
+                    }
+        except Exception as e:
+            print(e)
+
     
     def create(self, expense: Expense) -> Expense:
         pass

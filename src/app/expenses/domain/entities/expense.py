@@ -16,4 +16,3 @@ class Expense(BaseModel):
     amount: ExpenseAmount
     idUser: int
     
-

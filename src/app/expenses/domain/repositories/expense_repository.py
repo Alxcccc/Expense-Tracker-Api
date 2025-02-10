@@ -6,7 +6,7 @@ from src.app.expenses.domain.entities.expense import Expense
 class ExpenseRepository(ABC):
     
     @abstractmethod
-    def get_all(self) -> List[Expense]:
+    def get_all(self, id_user: int) -> List[Expense]:
         pass
     
     @abstractmethod

@@ -17,4 +17,10 @@ class Expense(BaseModel):
     category: ExpenseCategory
     amount: ExpenseAmount
     idUser: ExpenseIdUser
-    
+
+class ExpenseCreate(BaseModel):
+    expense_title: ExpenseTitle
+    expense_date: ExpenseDate
+    description: ExpenseDescription
+    category: ExpenseCategory
+    amount: ExpenseAmount

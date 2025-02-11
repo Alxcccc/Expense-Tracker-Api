@@ -13,4 +13,4 @@ class ExpenseAmount(BaseModel):
         return isinstance(other, ExpenseAmount) and self.value == other.value
     
     def __str__(self):
-        return self.value
+        return str(self.value)

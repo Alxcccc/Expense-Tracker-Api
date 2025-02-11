@@ -13,4 +13,5 @@ class ExpenseIdUser(BaseModel):
         return isinstance(other, ExpenseIdUser) and self.value == other.value
     
     def __str__(self):
-        return self.value
+        return str(self.value)
+                

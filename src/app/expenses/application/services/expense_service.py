@@ -17,8 +17,8 @@ class ExpenseService:
     def get_by_id(self, id_user: int , id_expense: int) -> Expense:
         return self.expense_repository.get_by_id(id_user, id_expense)
     
-    def create(self, expense: Expense) -> Expense:
-        return self.expense_repository.create(expense)
+    def create(self, id_user: int, expense: Expense) -> Expense:
+        return self.expense_repository.create(id_user, expense)
     
     def update(self, id_user: int, id_expense: int, expense: Expense) -> Expense:
         return self.expense_repository.update(id_user, id_expense, expense)

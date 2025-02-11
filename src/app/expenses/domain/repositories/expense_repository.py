@@ -14,7 +14,7 @@ class ExpenseRepository(ABC):
         pass
     
     @abstractmethod
-    def create(self, expense: Expense) -> Expense:
+    def create(self, id_user, expense: Expense) -> Expense:
         pass
     
     @abstractmethod

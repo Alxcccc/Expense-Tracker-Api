@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import List
 from sqlmodel import Session, select
 from sqlalchemy.exc import NoResultFound
 

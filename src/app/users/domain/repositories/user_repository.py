@@ -4,7 +4,7 @@ from typing import Optional, Union
 # entities
 from src.app.users.domain.entities.user import User, UserCreate
 
-class UsersRepository(ABC):
+class UserRepository(ABC):
 
     @abstractmethod
     def get_by_id(self, id_user: int) -> Optional[User]:

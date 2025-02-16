@@ -10,4 +10,4 @@ class ExpenseDatabase(SQLModel, table=True):
     description: str
     category: str
     amount: int
-    idUser: int
+    idUser: Optional[int] = Field(default=None, foreign_key="users.id_user")

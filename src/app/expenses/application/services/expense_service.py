@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import List
 
 # Repositories
 from src.app.expenses.domain.repositories.expense_repository import ExpenseRepository

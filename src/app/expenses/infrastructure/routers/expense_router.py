@@ -61,7 +61,7 @@ def edit_expense(id_user: int, id_expense: int, expense: ExpenseCreate, service:
         raise HTTPException(500, detail=str(e))
     
 @router.delete("/{id_user}/delete/{id_expense}")
-def edit_expense(id_user: int, id_expense: int, service: ExpenseService = Depends(get_product_service)):
+def delete_expense(id_user: int, id_expense: int, service: ExpenseService = Depends(get_product_service)):
     try:
         service.delete(id_user, id_expense)
         return {"message": "The expense deleted succesfully"}

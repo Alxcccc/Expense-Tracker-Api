@@ -74,7 +74,7 @@ class ExpenseRepositoryImpl(ExpenseRepository):
         try:
             with Session(DataBase.engine) as session:
                 new_expense = ExpenseDatabase(expense_title=expense.expense_title, expense_date=expense.expense_date, description=expense.description, category=expense.category, amount=expense.amount, idUser=id_user)
-                statement = session.add(new_expense)
+                session.add(new_expense)
                 session.commit()
         except Exception as e:
             raise Exception(str(e))

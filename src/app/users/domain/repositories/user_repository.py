@@ -5,6 +5,10 @@ from typing import Optional, Union
 from src.app.users.domain.entities.user import User, UserCreate
 
 class UserRepository(ABC):
+    
+    @abstractmethod
+    def login(self, username: str, password: str) -> Union[User, bool]:
+        pass
 
     @abstractmethod
     def get_by_id(self, id_user: int) -> Optional[User]:

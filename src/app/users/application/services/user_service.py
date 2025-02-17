@@ -11,6 +11,9 @@ class UserService:
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
         
+    def login(self, username: str, password: str) -> Union[User, bool]:
+        return self.user_repository.login(username, password)
+    
     def get_by_id(self, id_user: int) -> Optional[User]:
         return self.user_repository.get_by_id(id_user)
     

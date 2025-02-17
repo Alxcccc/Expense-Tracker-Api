@@ -9,17 +9,9 @@ from src.app.users.infrastructure.repositories.user_repository_impl import UserR
 # Services
 from src.app.users.application.services.user_service import UserService
 
-# Database
-from src.app.infrastructure.database.database import DataBase
-
-# Models Database
-from src.app.infrastructure.database.models.user_model import UserDatabase
-
 # Validator
 from src.app.users.domain.value_objects.user_id import UserId
-from src.app.users.domain.value_objects.user_username import UserUsername
-from src.app.users.domain.value_objects.user_password import UserPassword
-from src.app.users.domain.value_objects.user_email import UserGmail
+
 
 router = APIRouter()
 
@@ -28,7 +20,7 @@ def get_product_service():
     return UserService(repository)
 
 @router.get("/{id_user}")
-def get_id_user(id_user: int, service: UserService = Depends(get_product_service)):
+def get_id_user(id_user: int, service: UserService = Depends(get_product_service)) -> User:
     try:
         format_id_user = UserId(value=id_user)
         result = service.get_by_id(format_id_user.value)
@@ -36,4 +28,22 @@ def get_id_user(id_user: int, service: UserService = Depends(get_product_service
             raise HTTPException(404, detail="User not exists")
         return result
     except Exception as e:
-        raise HTTPException(404, detail=str(e))
+        raise HTTPException(500, detail=str(e))
+    
+@router.post("/register")
+def create_user(new_user: UserCreate, service: UserService = Depends(get_product_service)):
+    try:
+        service.create(new_user)
+        return {"message": "The user created succesfully"}
+    
+    except Exception as e:
+        raise HTTPException(500, detail=str(e))
+    
+@router.delete("/delete/{id_user}")
+def delete_expense(id_user: int, service: UserService = Depends(get_product_service)):
+    try:
+        service.delete(id_user)
+        return {"message": "The expense deleted succesfully"}
+    
+    except Exception as e:
+        raise HTTPException(500, detail=str(e))

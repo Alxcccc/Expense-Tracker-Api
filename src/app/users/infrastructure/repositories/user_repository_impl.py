@@ -56,7 +56,7 @@ class UserRepositoryImpl(UserRepository):
     def create(self, user: UserCreate) -> Union[User, bool]:
         try:
             with Session(DataBase.engine) as session:
-                crypt_password = crypt_password(user.password.value)
+                crypt_password = self.crypt_password(user.password.value)
                 new_user = UserDatabase(username=user.username, password=crypt_password, gmail=user.gmail)
                 session.add(new_user)
                 session.commit()

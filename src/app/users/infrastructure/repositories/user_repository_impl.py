@@ -21,6 +21,7 @@ from src.app.infrastructure.database.models.user_model import UserDatabase
 from src.app.users.domain.value_objects.user_id import UserId
 from src.app.users.domain.value_objects.user_username import UserUsername
 from src.app.users.domain.value_objects.user_password import UserPassword
+from src.app.users.domain.value_objects.user_email import UserGmail
 
 class UserRepositoryImpl(UserRepository):
     context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -48,7 +49,7 @@ class UserRepositoryImpl(UserRepository):
                 user = session.exec(statement).one()
                 if not user:
                     return None
-                return User(id_user=UserId(value=user.id_user), username=UserUsername(value=user.username), password=UserPassword(value=user.password), gmail=user.gmail)
+                return User(id_user=UserId(value=user.id_user), username=UserUsername(value=user.username), password=UserPassword(value=user.password), gmail=UserGmail(value=user.gmail))
         except Exception as e:
             raise Exception(str(e))
     

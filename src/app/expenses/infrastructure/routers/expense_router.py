@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException,Depends
+from fastapi import APIRouter, HTTPException, Depends
 
 from src.app.expenses.domain.entities.expense import Expense, ExpenseCreate
 from src.app.expenses.infrastructure.repositories.expense_repository_impl import ExpenseRepositoryImpl

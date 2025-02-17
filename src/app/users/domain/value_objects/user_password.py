@@ -4,7 +4,7 @@ class UserPassword(BaseModel):
     value: str = Field(..., description="Password of user")
     
     @field_validator("value")
-    def validator_password(cls, value: str, size_max = 20):
+    def validator_password(cls, value: str, size_max = 40):
         
         if len(value) > size_max:
             raise ValueError(f"the length of password is greater than {size_max}")

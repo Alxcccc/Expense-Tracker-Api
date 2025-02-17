@@ -47,9 +47,10 @@ class UserRepositoryImpl(UserRepository):
             with Session(DataBase.engine) as session:
                 statement = select(UserDatabase).where(UserDatabase.id_user == id_user)
                 user = session.exec(statement).one()
-                if not user:
-                    return None
                 return User(id_user=UserId(value=user.id_user), username=UserUsername(value=user.username), password=UserPassword(value=user.password), gmail=UserGmail(value=user.gmail))
+        except NoResultFound:
+            return None
+        
         except Exception as e:
             raise Exception(str(e))
     

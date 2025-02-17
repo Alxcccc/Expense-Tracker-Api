@@ -6,13 +6,13 @@ from src.app.users.domain.value_objects.user_username import UserUsername
 from src.app.users.domain.value_objects.user_password import UserPassword
 
 class User(BaseModel):
-    id_user = Optional[UserId]
-    username = UserUsername
-    password = UserPassword
-    gmail = EmailStr
+    id_user: Optional[UserId]
+    username: UserUsername
+    password: UserPassword
+    gmail: EmailStr
     
 class UserCreate(BaseModel):
-    username = UserUsername
-    password = UserPassword
-    gmail = EmailStr
+    username: UserUsername
+    password: UserPassword
+    gmail: EmailStr
     

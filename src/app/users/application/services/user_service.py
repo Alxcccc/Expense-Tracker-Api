@@ -1,14 +1,14 @@
 from typing import Optional, Union
 
 # Repositories
-from src.app.users.domain.repositories.user_repository import UsersRepository
+from src.app.users.domain.repositories.user_repository import UserRepository
 
 # Entities
 from src.app.users.domain.entities.user import User, UserCreate
 
 class UserService:
     
-    def __init__(self, user_repository: UsersRepository):
+    def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
         
     def get_by_id(self, id_user: int) -> Optional[User]:

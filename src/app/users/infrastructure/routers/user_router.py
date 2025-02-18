@@ -60,11 +60,9 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], service: U
     
 
 @router.get("/")
-def get_id_user(token: Annotated[str, Depends(oauth2_scheme)], service: UserService = Depends(get_product_service)) -> User:
+def get_id_user(id_user_token: Annotated[str, Depends(get_current_user)], service: UserService = Depends(get_product_service)) -> User:
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        id_user = payload.get("sub")
-        format_id_user = UserId(value=int(id_user))
+        format_id_user = UserId(value=int(id_user_token))
         result = service.get_by_id(format_id_user.value)
         if not result:
             raise HTTPException(404, detail="User not exists")
@@ -82,7 +80,7 @@ def create_user(new_user: UserCreate, service: UserService = Depends(get_product
         raise HTTPException(500, detail=str(e))
     
 @router.delete("/delete/{id_user}")
-def delete_expense(token: Annotated[str, Depends(oauth2_scheme)], id_user: int, service: UserService = Depends(get_product_service)):
+def delete_user(id_user_token: Annotated[str, Depends(get_current_user)], id_user: int, service: UserService = Depends(get_product_service)):
     try:
         service.delete(id_user)
         return {"message": "The expense deleted succesfully"}

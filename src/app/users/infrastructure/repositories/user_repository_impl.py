@@ -28,7 +28,6 @@ class UserRepositoryImpl(UserRepository):
     
     def crypt_password(cls, password: str):
         password = cls.context.hash(password)
-        print(type(password))
         return password
     
     def crypt_verify(cls, username, password):
@@ -36,18 +35,33 @@ class UserRepositoryImpl(UserRepository):
             with Session(DataBase.engine) as session:
                 statement = select(UserDatabase).where(UserDatabase.username == username)
                 user = session.exec(statement).one()
-                if not user:
-                    return None
                 return cls.context.verify(password, user.password)
+            
+        except NoResultFound:
+            return None
+        
         except Exception as e:
             raise Exception(str(e))
-
+        
+    def login(self, username, password) -> Optional[User]:
+        try:
+            with Session(DataBase.engine) as session:
+                verify = self.crypt_verify(username, password)
+                if verify:
+                    statement = select(UserDatabase).where(UserDatabase.username == username)
+                    user = session.exec(statement).one()
+                    return user.id_user
+                raise ValueError("The credentials are wrong")
+        except Exception as e:
+            raise Exception(str(e))
+        
     def get_by_id(self, id_user: int) -> Optional[User]:
         try:
             with Session(DataBase.engine) as session:
                 statement = select(UserDatabase).where(UserDatabase.id_user == id_user)
                 user = session.exec(statement).one()
                 return User(id_user=UserId(value=user.id_user), username=UserUsername(value=user.username), password=UserPassword(value=user.password), gmail=UserGmail(value=user.gmail))
+            
         except NoResultFound:
             return None
         
